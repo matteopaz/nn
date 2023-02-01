@@ -51,3 +51,11 @@ def adjust_list(a, da, learningrate):
 
 def copyarr(arr):
     return [a for a in arr]
+
+def save(obj, filename):
+    with open(filename, "wb") as f:
+        pickle.dump(obj, f)
+
+def load(filename):
+    with open(filename, "rb") as f:
+        return pickle.load(f)

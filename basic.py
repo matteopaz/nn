@@ -2,12 +2,12 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 from helpers import *
+import pickle
 
 # class Neural_Net:
 #     def __init__(self, shape):
 #         self.shape = shape
 #         self.weights = []
-    
 
 A = [ # ONLY MATRICES NOT VECTORS
 np.array([[5], [-5], [5] ,[-5]]), 
@@ -24,19 +24,9 @@ np.array([[-12.5], [-12.5]]),
 np.array([[-2]])
 ] #  Bias connections
 
-# A = [
-# np.array([9.527, -7.895, 8.602, -7.956]), 
-# np.array([
-# [11.006, 9.855, -1.801, -1.214],
-# [-1.405, -1.730, 10.129, 11.1]
-# ]),
-# np.array([12.902, 13.223])
-# ] #  Hidden layer connections
-# B = [
-# np.array([-0.738, 3.651, -4.384, 7.219]),
-# np.array([-14.323, -14.440]),
-# np.array([-6.178])
-# ] #  Bias connections
+A = load("trained1")[0]
+B = load("trained1")[1]
+
 connections = len(A)
 layers = connections + 1
 
@@ -107,10 +97,11 @@ dataset = [(0,0),(0.25,1),(0.5,0.5),(0.75,1),(1,0)]
 
 
 trained = backprop(dataset, 100000, True)
+
 Ao = trained[0]
 Bo = trained[1]
-# for i in range(len(A)):
-#     print(Ao, Bo)
+save(trained, "trained1")
+
 initialnet = makenet(A, B)
 plot(dataset, initialnet, 1000, "r")
 trainednet = makenet(Ao, Bo)
